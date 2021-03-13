@@ -16,6 +16,9 @@ const development = {
 const production = {
   type: 'postgres',
   url: process.env.DATABASE_URL,
+  extra: {
+    ssl: true
+  },
   logging: true,
   entities: ['dist/**/*.entity.ts'],
   migrations: ['dist/migrations/**/*.ts'],
