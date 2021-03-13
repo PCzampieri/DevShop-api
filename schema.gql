@@ -1,0 +1,151 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: String
+  name: String
+  slug: String
+}
+
+type Product {
+  id: String
+  name: String
+  description: String
+  slug: String
+  category: String
+}
+
+type Brand {
+  id: String
+  name: String
+  slug: String
+  logo: String
+}
+
+type User {
+  id: String
+  name: String
+  email: String
+  role: String
+}
+
+type AuthToken {
+  refreshToken: String!
+  accessToken: String!
+}
+
+type AuthSession {
+  id: String!
+  userAgent: String
+  lastUsedAt: DateTime
+  active: Boolean
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  getAllBrands: [Brand!]!
+  getBrandById(id: String!): Brand!
+  getBrandBySlug(slug: String!): Brand!
+  getAllCategories: [Category!]!
+  getCategoryById(id: String!): Category!
+  getCategoryBySlug(slug: String!): Category!
+  panelGetAllUsers: [User!]!
+  panelGetAllUserSessions(id: String!): [AuthSession!]!
+  panelGetUserById(id: String!): User!
+  panelGetUserByEmail(email: String!): User!
+  panelGetMe: User!
+  getProductById(id: String!): Product!
+  getProductBySlug(slug: String!): Product!
+  getAllProducts: [Product!]!
+}
+
+type Mutation {
+  panelCreateBrand(input: BrandCreateInput!): Brand!
+  panelUploadBrandLogo(file: Upload!, id: String!): Boolean!
+  panelRemoveBrandLogo(id: String!): Boolean!
+  panelUpdateBrand(input: BrandUpdateInput!): Brand!
+  panelDeleteBrand(id: String!): Boolean!
+  panelCreateCategory(input: CategoryCreateInput!): Category!
+  panelUpdateCategory(input: CategoryUpdateInput!): Category!
+  panelDeleteCategory(id: String!): Boolean!
+  panelCreateUser(input: UserCreateInput!): User!
+  generateUser(input: UserCreateInput!): User!
+  panelUpdateUser(input: UserUpdateInput!): User!
+  panelChangeUserPassword(input: UserPasswordUpdateInput!): Boolean!
+  panelDeleteUser(id: String!): Boolean!
+  auth(input: AuthUserInput!): AuthToken!
+  accessToken(refreshToken: String!): String!
+  panelInvalidadeUserSession(id: String!): Boolean!
+  panelCreateProduct(input: ProductCreateInput!): Product!
+  panelUpdateProduct(input: ProductUpdateInput!): Product!
+  panelDeleteProduct(id: String!): Boolean!
+}
+
+input BrandCreateInput {
+  name: String!
+  slug: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input BrandUpdateInput {
+  id: String!
+  name: String!
+  slug: String!
+}
+
+input CategoryCreateInput {
+  name: String!
+  slug: String!
+}
+
+input CategoryUpdateInput {
+  id: String!
+  name: String!
+  slug: String!
+}
+
+input UserCreateInput {
+  name: String!
+  email: String!
+  password: String!
+  role: String!
+}
+
+input UserUpdateInput {
+  id: String!
+  name: String!
+  email: String!
+  role: String!
+}
+
+input UserPasswordUpdateInput {
+  id: String!
+  password: String!
+}
+
+input AuthUserInput {
+  email: String!
+  password: String!
+}
+
+input ProductCreateInput {
+  name: String!
+  description: String!
+  slug: String!
+  category: String!
+}
+
+input ProductUpdateInput {
+  id: String!
+  name: String!
+  description: String!
+  slug: String!
+  category: String!
+}
