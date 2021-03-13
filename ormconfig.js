@@ -4,20 +4,30 @@ require('dotenv').config()
 const development = {
   type: 'postgres',
   url: process.env.DATABASE_URL,
+
   logging: true,
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/migrations/**/*.ts'],
   cli: {
     entitiesDir: 'src/**',
     migrationsDir: 'src/migrations/'
+  },
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 }
 
 const production = {
   type: 'postgres',
   url: process.env.DATABASE_URL,
+  ssl: true,
   extra: {
-    ssl: true
+    ssl: {
+      rejeitarUnauthorized: false
+    }
   },
   logging: true,
   entities: ['dist/**/*.entity.ts'],
