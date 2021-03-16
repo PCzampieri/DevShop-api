@@ -35,6 +35,7 @@ import { CoreModule } from './core/core.module'
     CoreModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
+      cors: true,
       context: ({ req, res }) => ({ req, res })
     }),
     BrandModule,
