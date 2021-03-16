@@ -5,9 +5,7 @@ import * as aws from 'aws-sdk'
 export class S3 {
   constructor() {
     aws.config.update({
-      region: 'us-east-2',
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+      region: 'us-east-2'
     })
   }
   async upload(
@@ -24,8 +22,12 @@ export class S3 {
       ContentType: mimetype,
       Body: stream
     }
-    const { Location } = await s3.upload(s3Params).promise()
-    return Location
+    try {
+      const { Location } = await s3.upload(s3Params).promise()
+      return Location
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async deleteObject(
