@@ -5,8 +5,8 @@ module.exports = {
   type: 'postgres',
   url: process.env.DATABASE_URL,
   logging: true,
-  entities: ['src/**/*.entity.ts'],
-  migrations: ['src/migrations/**/*.ts'],
+  entities: ['dist/**/*.entity.js'],
+  migrations: ['dist/migrations/**/*.js'],
   cli: {
     entitiesDir: 'src/**',
     migrationsDir: 'src/migrations/'
