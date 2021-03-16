@@ -34,6 +34,10 @@ import { CoreModule } from './core/core.module'
     }),
     CoreModule,
     GraphQLModule.forRoot({
+      cors: {
+        origin: '*',
+        credentials: true,
+      },
       autoSchemaFile: 'schema.gql',
       context: ({ req, res }) => ({ req, res }),
     }),
