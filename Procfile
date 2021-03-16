@@ -1,2 +1,2 @@
 release: npx typeorm migration:run
-web: yarn start:prod
+web: node dist/main
