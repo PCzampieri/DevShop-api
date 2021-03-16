@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
@@ -21,9 +22,17 @@ import { CoreModule } from './core/core.module'
         url: configService.get('DATABASE_URL'),
         autoLoadEntities: true,
         synchronize: false,
-        logging: true
+        logging: true,
+        // production ssl on heroku
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false
+          }
+        }
       })
     }),
+
     CoreModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
