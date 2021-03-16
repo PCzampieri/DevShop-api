@@ -32,7 +32,6 @@ import { CoreModule } from './core/core.module'
         }
       })
     }),
-
     CoreModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',

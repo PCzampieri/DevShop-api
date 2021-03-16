@@ -5,7 +5,9 @@ import * as aws from 'aws-sdk'
 export class S3 {
   constructor() {
     aws.config.update({
-      region: 'us-east-2'
+      region: 'us-east-2',
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
     })
   }
   async upload(
