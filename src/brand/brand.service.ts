@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { S3 } from 'src/utils/s3'
@@ -11,7 +12,7 @@ export class BrandService {
     @InjectRepository(Brand)
     private brandRepository: Repository<Brand>,
     private s3: S3
-  ) {}
+  ) { }
 
   async findAll(): Promise<Brand[]> {
     return this.brandRepository.find()
@@ -51,7 +52,6 @@ export class BrandService {
       'devshop-img',
       id + '-' + filename[0]
     )
-    console.log('url=============>>>>>>', url)
     await this.brandRepository.update(id, {
       logo: url
     })
@@ -84,7 +84,6 @@ export class BrandService {
       }
       if (brand.logo) {
         const filename = brand.logo.split('.com/')[1]
-        console.log(filename)
         await this.s3.deleteObject('devshop-img', filename)
       }
       await this.brandRepository.delete(id)
