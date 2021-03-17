@@ -1,2 +1,2 @@
 release: npx typeorm migration:run
-web: node dist/main
+web: npm run preinstall && node dist/main
