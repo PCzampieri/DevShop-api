@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -10,6 +10,7 @@ import { ProductModule } from './product/product.module'
 import { BrandModule } from './brand/brand.module'
 import { UserModule } from './user/user.module'
 import { CoreModule } from './core/core.module'
+import { graphqlUploadExpress } from 'graphql-upload'
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { CoreModule } from './core/core.module'
     }),
     CoreModule,
     GraphQLModule.forRoot({
+      uploads: false,
       cors: {
         origin: '*',
         credentials: true,
@@ -49,4 +51,8 @@ import { CoreModule } from './core/core.module'
   controllers: [AppController],
   providers: [AppService]
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(graphqlUploadExpress()).forRoutes('graphql')
+  }
+}

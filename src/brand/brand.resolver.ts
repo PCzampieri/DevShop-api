@@ -4,14 +4,15 @@ import { BrandService } from './brand.service'
 import { BrandCreateInput } from './dto/brand-create.input'
 import { BrandMappper } from './brand.mapper'
 import { BrandUpdateInput } from './dto/brand-update.input'
-import { GraphQLUpload } from 'apollo-server-express'
-import { FileUpload } from 'graphql-upload'
+// import { GraphQLUpload } from 'apollo-server-express'
+import { FileUpload, GraphQLUpload } from 'graphql-upload'
+//import { FileUpload } from 'graphql-upload'
 import { UseGuards } from '@nestjs/common'
 import { AuthGuard } from 'src/utils/jwt-auth.guard'
 
 @Resolver(of => BrandPublic)
 export class BrandResolver {
-  constructor(private readonly brandService: BrandService) { }
+  constructor(private readonly brandService: BrandService) {}
 
   @Query(returns => [BrandPublic], { name: 'getAllBrands' })
   async getAllBrands(): Promise<BrandPublic[]> {
